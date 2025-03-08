@@ -1,6 +1,6 @@
 #!/bin/bash
 
-name=Santase
+name=santase
 STEAM_RUNTIME_VERSION=3.0.20250108.112707
 GO_VERSION=go1.23.0  # Explicitly set Go version instead of using go env
 
@@ -26,9 +26,16 @@ export CGO_ENABLED=1
 
 rm -rf /usr/local/go && tar -C /usr/local -xzf .cache/${GO_VERSION}.linux-amd64.tar.gz
 
-# Build with proper rpath settings
-go build -ldflags \"-extldflags '-Wl,-rpath,\\\$ORIGIN'\" -o ${name}_linux_amd64
+# Build with proper rpath settings and disable VCS stamping
+go build -buildvcs=false -ldflags \"-extldflags '-Wl,-rpath,\\\$ORIGIN'\" -o ${name}_linux_amd64
 
-# Ensure the binary is executable
-chmod +x ${name}_linux_amd64
+# Check if build was successful before trying to chmod
+if [ -f \"${name}_linux_amd64\" ]; then
+    # Ensure the binary is executable
+    chmod +x ${name}_linux_amd64
+    echo \"Build completed successfully: ${name}_linux_amd64\"
+else
+    echo \"Build failed! Binary not created.\"
+    exit 1
+fi
 "
