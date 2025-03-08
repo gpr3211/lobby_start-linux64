@@ -21,7 +21,11 @@ modified build
 go: downloading github.com/assemblaj/purego-steamworks v0.0.0-20250305120547-0521e4817c19
 go: downloading github.com/ebitengine/purego v0.8.2
 Build completed successfully: santase_linux_amd64
-~/projects/Games/testbed-ebiten/lobby_start$ lazygit 
+
+```
+- Result
+```bash
+
 ~/projects/Games/testbed-ebiten/lobby_start$ ./santase_linux_amd64 
 [S_API] SteamAPI_Init(): Loaded '/home/pavlin/.steam/debian-installation/linux64/steamclient.so' OK.
 Setting breakpad minidump AppID = 480
